@@ -9,9 +9,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 public class CanvasAndBrush extends World
 {
-    private int x;
-    private final double AMPLITUDE = -60; //negative to account for graph reversed; in Greenfoot ↓ is up).
-    private final double Y_SHIFT = 200;   //centers y in scene.
+    private int x,y;
+    private final int PAINT_SPACING = 1;
 
     /**
      * Constructor for objects of class MathWorld.
@@ -26,29 +25,27 @@ public class CanvasAndBrush extends World
     }
     
     public void act()
-    {
-        //Convert radians (the x) to degrees
-        double degrees = x * Math.PI / 180;
-        
-        //Limit x to 2 periods
+    {        
         if(x < getWidth())
         {
-            //Adds a point to the graph at (x, y(x))
-            double y = mathFunction(degrees);
-            addObject(new Paint(), x, (int)(Y_SHIFT + AMPLITUDE * y));
-            x++;
+           applyPaint(x,mathFunction());
         }
         else
         {
             //Ends act method
             Greenfoot.stop();
         }
-        
+        x += PAINT_SPACING;
     }
     
-    private double mathFunction(double functionInput)
+    private int mathFunction()
     {
-        //Sets sin as the function, i.e. y(x) = sin(x).
-        return Math.sin(functionInput);
+        //Sets sin as the function, i.e. y(x) = 200 + 60sin(x) with x converted to radians
+        return (int) (200 + 60 * Math.sin(x * Math.PI / 180));
+    }
+    
+    private void applyPaint(int x, int y)
+    {
+        addObject(new Paint(), x, y);        
     }
 }
