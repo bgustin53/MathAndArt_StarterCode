@@ -41,7 +41,7 @@ public class CanvasAndBrush extends World
     private int mathFunction()
     {
         //Sets sin as the function, i.e. y(x) = 200 + 60sin(x) with x converted to radians
-        return (int) (200 + 60 * Math.sin(x * Math.PI / 180));
+        return (int) (200 - 60 * Math.sin(x * Math.PI / 180));
     }
     
     private void applyPaint(int x, int y)
