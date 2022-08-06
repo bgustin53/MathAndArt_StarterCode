@@ -15,7 +15,7 @@ public class Fractal extends Canvas
     private int frames;
     private final int DENSITY = 6;
     private final int MAX_LAYERS = 10;
-    private final int SPEED = 60;  //frames before next recursion
+    private final int SPEED = 40;  //frames before next recursion
 
     /**
      * Constructor for objects of class MathWorld.
@@ -32,13 +32,13 @@ public class Fractal extends Canvas
     {
         if(frames % SPEED == 0 && deep < MAX_LAYERS)
         {
-            frac(getWidth() / 2, getHeight() / 2, DENSITY, 0);
+            fractal(getWidth() / 2, getHeight() / 2, DENSITY, 0);
             deep++;
         }
         frames++;
     }
     
-    protected void frac(int midX, int midY, int depth, int rot)
+    protected void fractal(int midX, int midY, int depth, int rot)
     {
         // base case
         if (depth == 0) 
@@ -68,9 +68,9 @@ public class Fractal extends Canvas
         depth--;
         
         // recursive calls
-        frac(left, up, depth, 0);
-        frac(left, down, depth, 0);
-        frac(right, up, depth, 0);
-        frac(right, down, depth, 0);
+        fractal(left, up, depth, rot);
+        fractal(left, down, depth, rot);
+        fractal(right, up, depth, rot);
+        fractal(right, down, depth, rot);
     }
 }
